@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const Profile = require('./Profile');
-const { db : config } = require('../configs/config');
+const config = require('../configs/db');
 
 function initializeModels() {
     const {
@@ -12,7 +12,7 @@ function initializeModels() {
         dialect,
         pool,
         logging
-    } = config;
+    } = config[process.env.NODE_ENV || 'dev'];
     const models = {
         Profile
     };

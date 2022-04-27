@@ -2,7 +2,7 @@ function dumpError(error) {
     return {
         code : error.code,
         errors : error.errors,
-        errorMessage : error.message || 'Please, contact your system administrator'
+        errorMessage : error.message
     };
 }
 

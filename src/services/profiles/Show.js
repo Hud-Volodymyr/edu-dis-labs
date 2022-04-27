@@ -27,11 +27,11 @@ class ShowProfile extends Base {
 
         const timestamp = Date.now();
 
-        if (timestamp - nonce > expireTime) throw new Exception({ code: 'FORMAT_ERROR', message: 'Nonce expired' });
+        if (timestamp - nonce > expireTime) throw new Exception({ code: 'PERMISSION_DENIED', message: 'Nonce expired' });
 
         const ok = this.verify(publicKey, `${publicKey}${nonce}`, signature);
 
-        if (!ok) throw new Exception({ code: 'FORMAT_ERROR', message: 'Invalid signature' });
+        if (!ok) throw new Exception({ code: 'PERMISSION_DENIED', message: 'Invalid signature' });
 
         const profile = await Profile.findOne({
             where: {

@@ -52,8 +52,6 @@ class CreateProfile extends Base {
             lastName,
             email
         });
-
-        if (!profile) throw new Exception({ code: 'SERVER_ERROR', message: 'Failed to create profile' });
         
         return maskProfile(profile);
     }

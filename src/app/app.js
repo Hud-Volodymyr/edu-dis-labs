@@ -19,8 +19,6 @@ function init() {
     app.use(helpers.json);
     app.use(helpers.cors);
     app.use('/api/v1', router());
-    
-    return app
 }
 
 function start() {
@@ -29,6 +27,8 @@ function start() {
     server = securedApp.listen(appPort, () => {});
 
     server.shutdown = promisify(server.close);
+
+    return server;
 }
 
 function secure(httpsApp) {

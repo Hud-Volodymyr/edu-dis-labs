@@ -8,8 +8,9 @@
   "license": "ECL 2.0",
   "scripts": {
     "start": "node ./src/app.js",
-    "test": "jest",
+    "test": "NODE_ENV=test jest --coverage --runInBand --testTimeout=35000 --forceExit",
     "migration": "npx sequelize-cli db:migrate --config src/configs/db.js",
+    "migration:test": "npx sequelize-cli db:migrate --config src/configs/db.js --env test",
     "docs:api": "jsdoc2md  src/**/*.js  > docs/api/README.md",
     "docs:dev": "npm run docs:api && npx vuepress dev docs",
     "docs:build": "npm run docs:api && npx vuepress build docs",
@@ -25,6 +26,8 @@
     "mysql2": "^2.1.0",
     "npx": "^10.2.2",
     "sequelize": "^6.19.0",
+    "sequelize-cli": "^6.4.1",
+    "supertest": "^6.2.3",
     "vuepress": "^1.7.1",
     "vuepress-theme-cool": "^1.3.1"
   },
@@ -34,16 +37,14 @@
   },
   "jest": {
     "verbose": true,
-    "globalTeardown": "./tests/jestGlobalTeardown.js",
-    "globalSetup": "./tests/jestGlobalSetup.js",
     "collectCoverageFrom": [
-      "**/lib/**/*.js",
-      "**/bin/generateData/*.js",
+      "**/src/**/*.js",
       "!**/node_modules/**",
-      "!**/lib/controllers/*.js",
-      "!**/lib/router.js",
-      "!**/lib/App.js",
-      "!**/lib/errors/*.js"
+      "!**/src/controllers/*.js",
+      "!**/src/app/*.js",
+      "!**/src/configs/*.js",
+      "!**/src/bin/*.js",
+      "!**/src/app.js"
     ]
   }
 }
